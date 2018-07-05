@@ -3,6 +3,7 @@ package rpc
 import (
 	"fmt"
 
+	"github.com/decentralisedkev/Neo-Go-API/models"
 	"github.com/ybbus/jsonrpc"
 )
 
@@ -10,54 +11,49 @@ type Rpc struct {
 	Url string
 }
 
-func (u *Rpc) GetVersion() (VersionResults, error) {
-	rpcClient := jsonrpc.NewClient(u.Url)
+func GetVersion(url string) (*models.VersionResults, error) {
+	rpcClient := jsonrpc.NewClient(url)
 	response, err := rpcClient.Call("getversion", "")
-	var versionRes VersionResults
+	var versionRes models.VersionResults
 	response.GetObject(&versionRes)
 	if err != nil {
-		return versionRes, err
+		return nil, err
 	}
 
-	return versionRes, nil
+	return &versionRes, nil
 }
-func (u *Rpc) GetBlockCount() (int64, error) {
-	rpcClient := jsonrpc.NewClient(u.Url)
+func GetBlockCount(url string) (int64, error) {
+	rpcClient := jsonrpc.NewClient(url)
 	response, err := rpcClient.Call("getblockcount", "")
 
 	if err != nil {
-		return response.GetInt()
+		return 0, err
 	}
 
 	return response.GetInt()
 }
 
-type Host struct {
-	Address string
-	Port    int
-}
-
-func (u *Rpc) GetPeers() (map[string][]Host, error) {
-	rpcClient := jsonrpc.NewClient(u.Url)
+func GetPeers(url string) (map[string][]models.Host, error) {
+	rpcClient := jsonrpc.NewClient(url)
 
 	response, err := rpcClient.Call("getpeers", "")
 
-	if err != nil || response == nil {
-		return nil, nil
-	}
-	// fmt.Println(response)
-	var res map[string][]Host
+	var res map[string][]models.Host
 	err = response.GetObject(&res)
-	return res, err
+
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }
 
-func (u *Rpc) GetRawMempool() []string {
-	rpcClient := jsonrpc.NewClient(u.Url)
+func GetRawMempool(url string) ([]string, error) {
+	rpcClient := jsonrpc.NewClient(url)
 
 	response, err := rpcClient.Call("getrawmempool", "")
 	res := []string{}
-	if err != nil || response == nil {
-		return res
+	if err != nil {
+		return res, err
 	}
 
 	transactions := response.Result.([]interface{})
@@ -69,25 +65,25 @@ func (u *Rpc) GetRawMempool() []string {
 
 	}
 
-	return res
+	return res, nil
 }
 
-func (u *Rpc) GetBlock(index int) (BlockRes, error) {
+func (u *Rpc) GetBlock(index int) (models.BlockRes, error) {
 	rpcClient := jsonrpc.NewClient(u.Url)
 	response, err := rpcClient.Call("getblock", index, 1)
 	fmt.Println(response)
 	if err != nil {
 
-		return BlockRes{}, err
+		return models.BlockRes{}, err
 	}
 
-	var res *BlockRes
+	var res *models.BlockRes
 
 	err = response.GetObject(&res) // expects a rpc-object result value like: {"id": 123, "name": "alex", "age": 33}
 	if err != nil || res == nil {
 		// some error on json unmarshal level or json result field was null
 
-		return BlockRes{}, err
+		return models.BlockRes{}, err
 	}
 	return *res, nil
 
