@@ -1,30 +1,49 @@
 package main
 
 import (
-	"encoding/json"
+	"bytes"
+	"encoding/binary"
 	"fmt"
-	"io/ioutil"
 
+	blockingester "github.com/decentralisedkev/Neo-Go-API/BlockIngester"
+	"github.com/decentralisedkev/Neo-Go-API/database"
 	"github.com/decentralisedkev/Neo-Go-API/node"
 )
 
 func main() {
 
-	plan, _ := ioutil.ReadFile("main.json")
-	var data NodeList
-	err := json.Unmarshal(plan, &data)
-	if err != nil {
-		fmt.Println("There was an error ", err)
-	}
-	for _, element := range data.Sites {
-		block, err := element.GetBlock(200)
-		if err != nil {
-			continue
-		}
-		fmt.Printf("%+v\n", element)
-		fmt.Println(block.Hash)
+	db, _ := database.NewLDBDatabase("dirname", 0, 0)
+	table := database.NewTable(db, "block")
 
-	}
+	blockIndexBuffer := new(bytes.Buffer)
+	binary.Write(blockIndexBuffer, binary.LittleEndian, int64(2499476))
+
+	block, _ := table.Get(blockIndexBuffer.Bytes())
+	r := bytes.NewReader(block)
+	var blockMetric blockingester.BlockMetric
+	binary.Read(r, binary.LittleEndian, &blockMetric)
+
+	fmt.Printf("%+v\n", blockMetric)
+
+	// db.Close()
+	// os.RemoveAll(dirname)
+
+	// plan, _ := ioutil.ReadFile("main.json")
+	// var data NodeList
+	// err := json.Unmarshal(plan, &data)
+	// if err != nil {
+	// 	fmt.Println("There was an error ", err)
+	// }
+	// for _, element := range data.Sites {
+	// 	block, err := element.GetBlock(2499476)
+	// 	if err != nil {
+	// 		continue
+	// 	}
+	// 	err = blockingester.SaveBlockMetrics(block)
+
+	// 	break
+
+	// }
 
 }
 
