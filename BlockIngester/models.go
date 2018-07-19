@@ -12,7 +12,8 @@ type BlockMetric struct {
 	Transactions       [9]int64 // Transactions[0]=number of miner transactions,Transactions[1]= # Of IssueTransactions
 	AvgTransactionSize int64
 	Atrributes         [10]int64 // Attributes[0]=# of Contract Hash in block
-	TotalNeo           int64     // fixed8 iota
+	TotalVins          int64
+	TotalNeo           int64 // fixed8 iota
 	TotalGas           int64
 	AvgNeo             int64
 	AvgGas             int64

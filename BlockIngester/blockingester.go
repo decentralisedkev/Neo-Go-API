@@ -42,6 +42,7 @@ func SaveBlockMetrics(block models.BlockRes) error {
 	blockmetric.AvgTransactionSize = processAverageTransactionSize(block)
 	blockmetric.TotalGas, blockmetric.AvgGas = calculateTotalAndAverageAsset(block, GAS)
 	blockmetric.TotalNeo, blockmetric.AvgNeo = calculateTotalAndAverageAsset(block, NEO)
+	blockmetric.TotalVins = calculateNumberOfVins(block)
 	for _, tx := range block.Tx {
 		SysFeeAsInt, _ := strconv.Atoi(tx.SysFee)
 		NetFeeAsInt, _ := strconv.ParseFloat(tx.NetFee, 64)
@@ -165,4 +166,14 @@ func calculateTotalAndAverageAsset(block models.BlockRes, assetID string) (int64
 		}
 	}
 	return sum, sum / int64(numberOfAssets)
+}
+
+func calculateNumberOfVins(block models.BlockRes) int64 {
+
+	totalNumOfVins := int64(0)
+
+	for _, tx := range block.Tx {
+		totalNumOfVins += int64(len(tx.Vin))
+	}
+	return totalNumOfVins
 }

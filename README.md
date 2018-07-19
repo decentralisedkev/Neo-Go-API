@@ -16,9 +16,9 @@ An API primarily written in Golang that collects information on the nodes and th
 
 Below you will find a list of requested features gathered from surveying the community.
 
-[ x ] Node Latency
+[ - ] Node Latency
 
-[ x ] GetBlock, GetPeers, GetRawMempool, GetVersion
+[ - ] GetBlock, GetPeers, GetRawMempool, GetVersion
 
 [ - ] Node Stability
 
@@ -42,22 +42,22 @@ Below you will find a list of requested features gathered from surveying the com
 
 [ - ] Avg Neo and Gas per block
 
-[ ] Transactions Per Second (Mem)(2.8k)
+[   ] Transactions Per Second (Mem)(2.8k)
 
 [ - ] TX sizes over time
 
 
-[ ] Number of Vins Per Block
+[   ] Number of Vins Per Block
 
-[ ] Addresses -> Trans count (This would require a script parses for network transactions)
+[   ] Addresses -> Trans count (This would require a script parses for network transactions)
 
 ## Scoped Features
 
 [ - ] Avg Block Size
 
-[ ] Size of UTXO Per Block?
+[   ] Size of UTXO Per Block?
 
-[ ] Mempool size
+[   ] Mempool size
 
 
 ## Infrastructure decisions 
