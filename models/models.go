@@ -17,11 +17,11 @@ type BlockRes struct {
 		Verification string `json:"verification"`
 	} `json:"script"`
 	Tx []struct {
-		Txid       string        `json:"txid"`
-		Size       int           `json:"size"`
-		Type       string        `json:"type"`
-		Version    int           `json:"version"`
-		Attributes []interface{} `json:"attributes"`
+		Txid       string              `json:"txid"`
+		Size       int                 `json:"size"`
+		Type       string              `json:"type"`
+		Version    int                 `json:"version"`
+		Attributes []map[string]string `json:"attributes"`
 		Vin        []struct {
 			Txid      string `json:"txid"`
 			VoutIndex int    `json:"vout"`
