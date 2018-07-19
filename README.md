@@ -52,7 +52,8 @@ Below you will find a list of requested features gathered from surveying the com
 [ - ] Number of Vins Per Block
 
 [   ] Size of UTXO Per Block?
-[   ] Addresses -> Trans count (This would require a script parses for network transactions)
+
+[   ] Addresses -> Trans count? (This would require a script parses for network transactions)
 
 ## Scoped Features
 

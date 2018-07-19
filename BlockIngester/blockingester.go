@@ -28,27 +28,19 @@ func SaveBlockMetrics(block models.BlockRes) error {
 
 	blockmetric := BlockMetric{}
 	blockmetric.BlockTime = int64(block.Time)
-
 	blockmetric.BlockSize = int64(block.Size)
-	blockHeaderSize := 4 + 32 + 32 + 4 + 4 + 8 + 20 + 1 + len(block.Script.Invocation) + len(block.Script.Verification) + 1
+	blockHeaderSize := calculateHeaderSize(block)
 	blockmetric.HeaderSize = int64(blockHeaderSize)
 	copy(blockmetric.NextConsensusSig[:], block.Nextconsensus)
 	blockmetric.NumOfTrans = int64(len(block.Tx))
 
-	blockmetric.Sysfee = 0
-	blockmetric.Netfee = 0
+	blockmetric.Sysfee, blockmetric.Netfee = calculateNetFeeAndSysFee(block)
 	blockmetric.Transactions = ProcessTransactionType(block)
 	blockmetric.Atrributes = processAttributes(block)
 	blockmetric.AvgTransactionSize = processAverageTransactionSize(block)
 	blockmetric.TotalGas, blockmetric.AvgGas = calculateTotalAndAverageAsset(block, GAS)
 	blockmetric.TotalNeo, blockmetric.AvgNeo = calculateTotalAndAverageAsset(block, NEO)
 	blockmetric.TotalVins = calculateNumberOfVins(block)
-	for _, tx := range block.Tx {
-		SysFeeAsInt, _ := strconv.Atoi(tx.SysFee)
-		NetFeeAsInt, _ := strconv.ParseFloat(tx.NetFee, 64)
-		blockmetric.Sysfee = blockmetric.Sysfee + int64(SysFeeAsInt)
-		blockmetric.Netfee = blockmetric.Netfee + NetFeeAsInt
-	}
 
 	blockMetricBuffer := new(bytes.Buffer)
 	err := binary.Write(blockMetricBuffer, binary.LittleEndian, &blockmetric)
@@ -176,4 +168,23 @@ func calculateNumberOfVins(block models.BlockRes) int64 {
 		totalNumOfVins += int64(len(tx.Vin))
 	}
 	return totalNumOfVins
+}
+
+func calculateNetFeeAndSysFee(block models.BlockRes) (int64, float64) {
+
+	totalSysFee := int64(0)
+	totalNetFee := float64(0)
+
+	for _, tx := range block.Tx {
+		SysFeeAsInt, _ := strconv.Atoi(tx.SysFee)
+		NetFeeAsInt, _ := strconv.ParseFloat(tx.NetFee, 64)
+		totalSysFee += int64(SysFeeAsInt)
+		totalNetFee += NetFeeAsInt
+	}
+	return totalSysFee, totalNetFee
+}
+
+func calculateHeaderSize(block models.BlockRes) int64 {
+	HeaderSize := 4 + 32 + 32 + 4 + 4 + 8 + 20 + 1 + len(block.Script.Invocation) + len(block.Script.Verification) + 1
+	return int64(HeaderSize)
 }

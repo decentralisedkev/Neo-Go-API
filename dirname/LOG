@@ -898,3 +898,35 @@
 21:21:40.065245 db@janitor F·12 G·0
 21:21:40.065288 db@open done T·2.812629ms
 21:21:40.065388 table@compaction L0·4 -> L1·1 S·1KiB Q·110
+=============== Jul 19, 2018 (BST) ===============
+21:38:14.738075 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:38:14.738512 version@stat F·[6 4] S·2KiB[1KiB 962B] Sc·[1.50 0.00]
+21:38:14.738558 db@open opening
+21:38:14.738684 journal@recovery F·1
+21:38:14.739063 journal@recovery recovering @216
+21:38:14.739884 version@stat F·[6 4] S·2KiB[1KiB 962B] Sc·[1.50 0.00]
+21:38:14.741890 db@janitor F·13 G·1
+21:38:14.741939 db@janitor removing table-218
+21:38:14.742087 db@open done T·3.506507ms
+21:38:14.742197 table@compaction L0·4 -> L1·1 S·1KiB Q·110
+=============== Jul 19, 2018 (BST) ===============
+21:38:28.769529 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:38:28.769996 version@stat F·[6 4] S·2KiB[1KiB 962B] Sc·[1.50 0.00]
+21:38:28.770027 db@open opening
+21:38:28.770114 journal@recovery F·1
+21:38:28.770631 journal@recovery recovering @218
+21:38:28.771351 memdb@flush created L0@220 N·1 S·329B "blo..\x00\x00\x00,v111":"blo..\x00\x00\x00,v111"
+21:38:28.771735 version@stat F·[7 4] S·2KiB[2KiB 962B] Sc·[1.75 0.00]
+21:38:28.772734 db@janitor F·13 G·0
+21:38:28.772796 db@open done T·2.738197ms
+21:38:28.772888 table@compaction L0·5 -> L1·1 S·1KiB Q·112
+=============== Jul 19, 2018 (BST) ===============
+21:58:59.466617 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:58:59.467093 version@stat F·[7 4] S·2KiB[2KiB 962B] Sc·[1.75 0.00]
+21:58:59.467123 db@open opening
+21:58:59.467208 journal@recovery F·1
+21:58:59.467859 journal@recovery recovering @221
+21:58:59.468528 version@stat F·[7 4] S·2KiB[2KiB 962B] Sc·[1.75 0.00]
+21:58:59.469542 db@janitor F·13 G·0
+21:58:59.469590 db@open done T·2.452144ms
+21:58:59.469704 table@compaction L0·5 -> L1·1 S·1KiB Q·112
