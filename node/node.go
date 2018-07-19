@@ -2,26 +2,34 @@ package node
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/decentralisedkev/Neo-Go-API/models"
 	"github.com/decentralisedkev/Neo-Go-API/rpc"
 	"github.com/decentralisedkev/Neo-Go-API/utils/slice"
 )
 
+// type Node struct {
+// 	Protocol string
+// 	Url      string
+// 	Location string
+// 	Type     string
+// 	Locale   string
+// 	Address  string
+// 	Port     string
+// }
+
 type Node struct {
-	Protocol string
-	Url      string
-	Location string
-	Type     string
-	Locale   string
-	Address  string
-	Port     uint16
+	Protocol string `json:"protocol"`
+	URL      string `json:"url"`
+	Location string `json:"location"`
+	Locale   string `json:"locale"`
+	Port     string `json:"port"`
+	Type     string `json:"type"`
 }
 
 func (n *Node) String() string {
 	if n.Type == "RPC" {
-		return n.Address + ":" + strconv.Itoa(int(n.Port))
+		return n.Protocol + "://" + n.URL + ":" + n.Port
 	} else {
 		return "API Methods not implemented"
 	}

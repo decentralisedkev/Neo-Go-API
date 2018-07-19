@@ -1,4 +1,7 @@
-[
+{
+  "name": "MainNet",
+  "pollTime": "5000",
+  "sites": [
     {
       "service": "neoScan",
       "url": "https://neoscan.io/api/main_net/v1/",
@@ -99,12 +102,12 @@
       "locale": "sg"
     },
     {
-      "protocol": "https",
+      "protocol": "http",
       "url": "seed1.neo.org",
       "location": "China",
       "address": "47.94.164.49",
       "locale": "cn",
-      "port": "10331",
+      "port": "10332",
       "type": "RPC"
     },
     {
@@ -113,6 +116,7 @@
       "location": "China",
       "address": "139.219.106.33",
       "locale": "cn",
+      "port": "10332",
       "type": "RPC"
     },
     {
@@ -121,6 +125,7 @@
       "location": "Canada",
       "address": "47.89.178.72",
       "locale": "ca",
+      "port": "10332",
       "type": "RPC"
     },
     {
@@ -129,6 +134,7 @@
       "location": "Canada",
       "address": "47.88.53.224",
       "locale": "ca",
+      "port": "10332",
       "type": "RPC"
     },
     {
@@ -466,5 +472,14 @@
      "locale": "de",
      "port": "10332",
      "type": "RPC"
-    }
+    },
+    {
+      "protocol": "http",
+      "url": "rustylogic.ddns.net",
+      "location": "London",
+      "locale": "gb",
+      "port": "10332",
+      "type": "RPC"
+    }    
   ]
+}
