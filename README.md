@@ -22,23 +22,35 @@ Below you will find a list of requested features gathered from surveying the com
 
 [ - ] Node Stability
 
-[ ] Block Production Times
+[ - ] Average Block Production Times (Mem)
 
-[ ] Transaction count / Transactions per block(General) 
+[ - ] Average Trans size (Lifetime)
 
-[ ] Consensus Sigs Per Block
+[ - ] Average Attribute size (Lifetime)
 
-[ ] Header + Block Size
+[ - ]  Attribute Count (Lifetime)
 
-[ ] Sys and network fee distribution
+[ - ] Transaction count / Transactions per block(General) 
 
-[ ] Transactions Per Second
+[ - ] Consensus Sigs Per Block
 
-[ ] TX sizes over time
+[ - ] Header + Block Size
+
+[ - ] Sys and network fee distribution
+
+[ ] Transactions Per Second (Mem)(2.8k)
+
+[ - ] TX sizes over time
+
+[ ] Value of Out's per Block
+
+[ ] Number of Vins Per Block
+
+[ ] Addresses -> Trans count (This would require a script parses for network transactions)
 
 ## Scoped Features
 
-[ ] Avg Block Size
+[ - ] Avg Block Size
 
 [ ] Size of UTXO Per Block?
 
