@@ -40,6 +40,8 @@ func SaveBlockMetrics(block models.BlockRes) error {
 	blockmetric.Transactions = ProcessTransactionType(block)
 	blockmetric.Atrributes = processAttributes(block)
 	blockmetric.AvgTransactionSize = processAverageTransactionSize(block)
+	blockmetric.TotalGas, blockmetric.AvgGas = calculateTotalAndAverageAsset(block, GAS)
+	blockmetric.TotalNeo, blockmetric.AvgNeo = calculateTotalAndAverageAsset(block, NEO)
 	for _, tx := range block.Tx {
 		SysFeeAsInt, _ := strconv.Atoi(tx.SysFee)
 		NetFeeAsInt, _ := strconv.ParseFloat(tx.NetFee, 64)
@@ -142,4 +144,25 @@ func processAverageTransactionSize(block models.BlockRes) int64 {
 		totalSize += tx.Size
 	}
 	return int64(totalSize) / int64(len(block.Tx)) // always a Miner transaction, denominator never zero
+}
+
+func calculateTotalAndAverageAsset(block models.BlockRes, assetID string) (int64, int64) {
+
+	sum := int64(0)
+	numberOfAssets := 0
+
+	for _, tx := range block.Tx {
+		for _, vout := range tx.Vout {
+			if vout.Asset == assetID {
+				val, err := strconv.ParseFloat(vout.Value, 64)
+				valAsInt := int64(val * 1e8)
+				if err != nil {
+					continue
+				}
+				numberOfAssets++
+				sum += int64(valAsInt)
+			}
+		}
+	}
+	return sum, sum / int64(numberOfAssets)
 }

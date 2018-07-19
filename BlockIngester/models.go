@@ -12,6 +12,10 @@ type BlockMetric struct {
 	Transactions       [9]int64 // Transactions[0]=number of miner transactions,Transactions[1]= # Of IssueTransactions
 	AvgTransactionSize int64
 	Atrributes         [10]int64 // Attributes[0]=# of Contract Hash in block
+	TotalNeo           int64     // fixed8 iota
+	TotalGas           int64
+	AvgNeo             int64
+	AvgGas             int64
 }
 
 //Prefix = "Transactions" key = block_transID
@@ -19,6 +23,10 @@ type TransactionMetric struct {
 	TransSize int64
 }
 
+const (
+	NEO = "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b"
+	GAS = "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7"
+)
 const (
 	MinerTransaction      = "MinerTransaction"
 	IssueTransaction      = "IssueTransaction"

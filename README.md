@@ -38,6 +38,8 @@ Below you will find a list of requested features gathered from surveying the com
 
 [ - ] Sys and network fee distribution
 
+[ - ] Total and Avg Neo and Gas per block
+
 [ ] Transactions Per Second (Mem)(2.8k)
 
 [ - ] TX sizes over time
