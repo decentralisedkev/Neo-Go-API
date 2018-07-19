@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"sync"
 
 	"github.com/decentralisedkev/Neo-Go-API/node"
 )
@@ -17,10 +16,14 @@ func main() {
 	if err != nil {
 		fmt.Println("There was an error ", err)
 	}
-	var wg sync.WaitGroup
 	for _, element := range data.Sites {
-		wg.Add(1)
-		go fmt.Println(element.GetLatency())
+		block, err := element.GetBlock(200)
+		if err != nil {
+			continue
+		}
+		fmt.Printf("%+v\n", element)
+		fmt.Println(block.Hash)
+
 	}
 
 }

@@ -11,14 +11,9 @@ const (
 	//
 )
 
-// store mempool in memory.
-// We could have a background daemon which updates the blocks starting from current, then another daemon which updates the current blocks
-
 // average block size 24 hours period (Approx 2880 blocks) - memory
 // tx's per day 24 hour period (Approx 2880 blocks) - memory
-// mempool size - (MB) (memory)
-// number of utxos
-// Transactions per block
-// time it took for a transaction
+
+// time it took for a transaction --
 
 // When a block comes in, we look at how many blocks in memory, if >2.88k we delete last known and recalculate

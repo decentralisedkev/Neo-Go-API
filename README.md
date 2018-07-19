@@ -18,11 +18,11 @@ Below you will find a list of requested features gathered from surveying the com
 
 [ x ] Node Latency
 
-[ ] GetBlock, GetPeers, GetRawMempool, GetVersion
+[ x ] GetBlock, GetPeers, GetRawMempool, GetVersion
 
 [ - ] Node Stability
 
-[ ] Block Product Times
+[ ] Block Production Times
 
 [ ] Transaction count / Transactions per block(General) 
 
@@ -32,7 +32,7 @@ Below you will find a list of requested features gathered from surveying the com
 
 [ ] Sys and network fee distribution
 
-[ ] TPS
+[ ] Transactions Per Second
 
 [ ] TX sizes over time
 
@@ -42,7 +42,20 @@ Below you will find a list of requested features gathered from surveying the com
 
 [ ] Size of UTXO Per Block?
 
-[ ] 
+[ ] Mempool size
+
+
+## Infrastructure decisions 
+
+Leveldb will be used, so that the program can be ran without a cloud hosting provider. The alternative would have been dynamodb, however since they are both key-value stores, the interface will not change much, if you decide to switch to dynamodb.
+
+## Setup
+
+An import module will be provided which will alllow you to decode the chain.acc file, so that users do not have to sync with the other nodes from block zero.
+
+## Referenced APIS
+
+- https://www.blockchain.com/charts
 
 ## Structure
 

@@ -107,3 +107,12 @@ func (n *Node) GetLatency() (int64, error) {
 	}
 
 }
+
+func (n *Node) GetBlock(index int) (models.BlockRes, error) {
+	if n.Type == "RPC" {
+		return rpc.GetBlock(n.String(), index)
+	} else {
+		// rest methods not implemented
+		return models.BlockRes{}, fmt.Errorf("API methods not implemented")
+	}
+}

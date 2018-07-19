@@ -1,8 +1,6 @@
 package rpc
 
 import (
-	"fmt"
-
 	"github.com/decentralisedkev/Neo-Go-API/models"
 	"github.com/ybbus/jsonrpc"
 )
@@ -68,10 +66,9 @@ func GetRawMempool(url string) ([]string, error) {
 	return res, nil
 }
 
-func (u *Rpc) GetBlock(index int) (models.BlockRes, error) {
-	rpcClient := jsonrpc.NewClient(u.Url)
+func GetBlock(url string, index int) (models.BlockRes, error) {
+	rpcClient := jsonrpc.NewClient(url)
 	response, err := rpcClient.Call("getblock", index, 1)
-	fmt.Println(response)
 	if err != nil {
 
 		return models.BlockRes{}, err
